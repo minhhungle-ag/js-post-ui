@@ -1,11 +1,20 @@
 import postApi from './api/axiosClient'
-import { initPagination, initSearch, renderPagination, renderPostList } from './utils'
+import {
+    initPagination,
+    initSearch,
+    registerLightBox,
+    renderPagination,
+    renderPostList,
+    toast,
+} from './utils'
 
 async function handleFilterChange(filterName, filterValue) {
     try {
         //update query params
         const url = new URL(window.location)
-        url.searchParams.set(filterName, filterValue)
+        if (filterName) url.searchParams.set(filterName, filterValue)
+
+        // reset page
         if (filterName === 'title_like') url.searchParams.set('_page', 1)
         history.pushState({}, '', url)
 
@@ -20,6 +29,24 @@ async function handleFilterChange(filterName, filterValue) {
     }
 }
 
+function registerPostDeleteEvent() {
+    document.addEventListener('post-delete', async (event) => {
+        try {
+            const post = event.detail
+            const message = `Are you sure to remove post "${post.title}"`
+            if (window.confirm(message)) {
+                await postApi.remove(post.id)
+                await handleFilterChange()
+
+                toast.success(`Remove post successfully!`)
+            }
+        } catch (error) {
+            console.log('failed to remove post: ', error)
+            toast.error(error.message)
+        }
+    })
+}
+
 //------ MAIN ------//
 ;(async () => {
     try {
@@ -31,6 +58,8 @@ async function handleFilterChange(filterName, filterValue) {
 
         history.pushState({}, '', url)
         const queryParams = url.searchParams
+
+        registerPostDeleteEvent()
 
         // filter
         initPagination({
