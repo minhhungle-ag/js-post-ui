@@ -36,7 +36,7 @@ a > i {
 }
 
 a:hover > i {
-  transform: rotate(90deg);
+  transform: rotate(360deg);
 }
 
 /* Add underline for all h1 */

@@ -17,12 +17,7 @@
         />
 
         <!-- Font awesome -->
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-            integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-            crossorigin="anonymous"
-        />
+        <script src="https://kit.fontawesome.com/c79a8ca9fc.js" crossorigin="anonymous"></script>
 
         <!-- Use font Rubik -->
         <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
@@ -96,7 +91,8 @@
 
                             <img
                                 class="post-image"
-                                src="https://picsum.photos/1368/800"
+                                data-album="easy-frontend"
+                                src="https://picsum.photos/id/575/1368/1000"
                                 alt="Picsum photos"
                             />
 
@@ -123,9 +119,38 @@
 
                             <img
                                 class="post-image"
-                                src="https://picsum.photos/1368/1000"
+                                data-album="easy-frontend"
+                                src="https://picsum.photos/id/464/1368/1000"
                                 alt="Picsum photos"
                             />
+
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+                                suscipit inventore hic tenetur, dolor iusto dolorum rem, non error,
+                                saepe quia dignissimos quas ducimus aliquid. Praesentium ea
+                                aspernatur vero deserunt.
+                            </p>
+
+                            <img
+                                class="post-image"
+                                data-album="easy-frontend"
+                                src="https://picsum.photos/id/46/1368/1000"
+                                alt="Picsum photos"
+                            />
+
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+                                suscipit inventore hic tenetur, dolor iusto dolorum rem, non error,
+                                saepe quia dignissimos quas ducimus aliquid. Praesentium ea
+                                aspernatur vero deserunt.
+                            </p>
+
+                            <p>
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+                                suscipit inventore hic tenetur, dolor iusto dolorum rem, non error,
+                                saepe quia dignissimos quas ducimus aliquid. Praesentium ea
+                                aspernatur vero deserunt.
+                            </p>
 
                             <p>
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci
@@ -143,13 +168,47 @@
             <small>Created by Minh Hung le with <i class="fas fa-heart"></i></small>
         </footer>
 
-        <!-- Scripts should be placed here to prevent blocking render UI -->
-        <script type="module" src="/js/post-detail.js"></script>
+        <div id="lightbox" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img
+                            data-id="lightboxImg"
+                            src="https://picsum.photos/id/575/1368/800"
+                            alt="lightbox"
+                            class="w-100"
+                        />
 
+                        <div class="text-center mt-3">
+                            <button
+                                data-id="lightboxPrev"
+                                type="button"
+                                class="btn btn-secondary btn-sm me-2"
+                            >
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+
+                            <button
+                                data-id="lightboxNext"
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bootstrap -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
+
+        <!-- Scripts should be placed here to prevent blocking render UI -->
+        <script type="module" src="/js/post-detail.js"></script>
     </body>
 </html>
