@@ -13,7 +13,7 @@ async function handleFilterChange(filterName, filterValue) {
 
         // re-render post list
         const { data, pagination } = await postApi.getAll(url.searchParams)
-        renderPostList(data)
+        renderPostList('postsList', data)
         renderPagination('pagination', pagination)
     } catch (error) {
         console.log('failed to fetch post list: ', error)
