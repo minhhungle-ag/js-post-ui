@@ -1,30 +1,38 @@
-import axiosClient from './postApi'
+import axios from 'axios'
 
-const postApi = {
-    getAll(params) {
-        const url = `/posts`
-        return axiosClient.get(url, { params })
+const axiosClient = axios.create({
+    baseURL: 'https://js-post-api.herokuapp.com/api',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+
+// Add a request interceptor
+axiosClient.interceptors.request.use(
+    function (config) {
+        // Do something before request is sent
+        return config
     },
 
-    getById(id) {
-        const url = `/posts/${id}`
-        return axiosClient.get(url)
+    function (error) {
+        // Do something with request error
+        return Promise.reject(error)
+    }
+)
+
+// Add a response interceptor
+axiosClient.interceptors.response.use(
+    function (response) {
+        // Any status code that lie within the range of 2xx cause this function to trigger
+        // Do something with response data
+        return response.data
     },
 
-    add(data) {
-        const url = `/posts`
-        return axiosClient.post(url, data)
-    },
+    function (error) {
+        // Any status codes that falls outside the range of 2xx cause this function to trigger
+        // Do something with response error
+        return Promise.reject(error)
+    }
+)
 
-    update(data) {
-        const url = `/posts/${data.id}`
-        return axiosClient.patch(url, data)
-    },
-
-    remove(id) {
-        const url = `/posts/${id}`
-        return axiosClient.delete(url)
-    },
-}
-
-export default postApi
+export default axiosClient

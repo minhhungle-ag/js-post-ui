@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import postApi from './api/axiosClient'
+import postApi from './api/postApi'
 import { registerLightBox, setTextContent } from './utils'
 
 function renderPostDetail(post) {

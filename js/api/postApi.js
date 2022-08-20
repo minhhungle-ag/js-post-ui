@@ -1,38 +1,44 @@
-import axios from 'axios'
+import axiosClient from './axiosClient'
 
-const axiosClient = axios.create({
-    baseURL: 'https://js-post-api.herokuapp.com/api',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
-
-// Add a request interceptor
-axiosClient.interceptors.request.use(
-    function (config) {
-        // Do something before request is sent
-        return config
+const postApi = {
+    getAll(params) {
+        const url = `/posts`
+        return axiosClient.get(url, { params })
     },
 
-    function (error) {
-        // Do something with request error
-        return Promise.reject(error)
-    }
-)
-
-// Add a response interceptor
-axiosClient.interceptors.response.use(
-    function (response) {
-        // Any status code that lie within the range of 2xx cause this function to trigger
-        // Do something with response data
-        return response.data
+    getById(id) {
+        const url = `/posts/${id}`
+        return axiosClient.get(url)
     },
 
-    function (error) {
-        // Any status codes that falls outside the range of 2xx cause this function to trigger
-        // Do something with response error
-        return Promise.reject(error)
-    }
-)
+    add(data) {
+        const url = `/posts`
+        return axiosClient.post(url, data)
+    },
 
-export default axiosClient
+    update(data) {
+        const url = `/posts/${data.id}`
+        return axiosClient.patch(url, data, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        })
+    },
+
+    remove(id) {
+        const url = `/posts/${id}`
+        return axiosClient.delete(url)
+    },
+
+    addFormData(data) {
+        const url = `/with-thumbnail/posts`
+        return axiosClient.post(url, data, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        })
+    },
+
+    updateFormData(data) {
+        const url = `/with-thumbnail/posts/${data.get('id')}`
+        return axiosClient.patch(url, data)
+    },
+}
+
+export default postApi

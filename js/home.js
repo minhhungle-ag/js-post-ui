@@ -1,4 +1,4 @@
-import postApi from './api/axiosClient'
+import postApi from './api/postApi'
 import {
     initPagination,
     initSearch,
